@@ -9,26 +9,13 @@ import simpy
 import random as rd
 import pandas as pd
 import matplotlib.pyplot as plt
+import sys
+
+from src.logging.logging import logging
+from src.exception.exception import CustomException
 
 # Import IoT constants
-from constants import (
-  NUM_OF_SENSORS, NUM_OF_ESP,
-  SIM_TIME, SEND_DATA_TIME
-)
-
-# Import mean constants for data analysis
-from constants import (
-  MEAN_TEMP, MEAN_HUMIDITY,
-  MEAN_LATENCY, MEAN_THROUGHPUT,
-  MEAN_PACKET_LOSS, MEAN_RSSI
-)
-
-# Import standard deviation constants for data analysis
-from constants import (
-  STD_TEMP, STD_HUMIDITY,
-  STD_LATENCY, STD_THROUGHPUT,
-  STD_PACKET_LOSS, STD_RSSI
-)
+from src.services.constants import *
 
 # Define Sensor class for IoT sensors to send data to gateway
 class Sensor:
@@ -100,6 +87,7 @@ class ESP32:
         "node": self.name
       }
       yield self.out_store.put(forward_packet)
+      logging.info(f"Packet sent from {self.name} to Gateway: {forward_packet}")
 
 # Define Raspberry Pi as Gateway class to receive data from sensors
 class Gateway:
@@ -112,6 +100,7 @@ class Gateway:
   def receive_data(self):
     '''Method to simulate receiving data from sensors.'''
     while True:
+      logging.info("Waiting for packets from ESPs...")
       packet = yield self.in_store.get()
       yield self.env.timeout(packet["latency"])  # Interval for receiving data based on latency
 
@@ -125,6 +114,7 @@ class Gateway:
           f"Latency: {packet['latency']}ms, Throughput: {packet['throughput']}kbps, "
           f"RSSI: {packet['rssi']}dBm"
         )
+      logging.info("Packet has been received and processed successfully.")
 
 # Define IoTSimulation Class to manage the simulation environment
 class IoTSimulation:
@@ -168,5 +158,10 @@ class IoTSimulation:
 
 # Define a function to run the simulation
 if __name__ == "__main__":
-  sim = IoTSimulation()
-  sim.start_simulation()
+  try:
+    sim = IoTSimulation()
+    logging.info("Starting IoT Simulation")
+    sim.start_simulation()
+    logging.info("IoT Simulation completed")
+  except Exception as e:
+    raise CustomException(sys, e)
