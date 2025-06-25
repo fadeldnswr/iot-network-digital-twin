@@ -46,7 +46,6 @@ class FourierSeries:
     plt.show()
 
 # Check if the script is run directly
-# Check if the script is run directly
 if __name__ == "__main__":
   try:
     # Create an instance of SplineInterpolation
