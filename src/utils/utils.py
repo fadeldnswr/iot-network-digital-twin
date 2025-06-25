@@ -5,6 +5,7 @@ Utility functions for various tasks.
 import pandas as pd
 import os
 import sys
+import numpy as np
 
 from datetime import datetime, timedelta
 from src.exception.exception import CustomException
@@ -47,3 +48,11 @@ def save_simulation_data(data, output_dir:str, file_name=None):
     return df, file_path
   except Exception as e:
     raise CustomException(e, sys)
+
+# Define fourier series function
+def fourier_series(t, *a):
+  ret = a[0] #a0
+  N = (len(a) - 1) // 2
+  for n in range(1, N + 1):
+    ret += a[2 * n-1] * np.cos(2 * np.pi * n * t / 1440) + a[2*n] * np.sin(2 * np.pi * n * t / 1440)
+  return ret
