@@ -13,6 +13,7 @@ import sys
 
 from src.logging.logging import logging
 from src.exception.exception import CustomException
+from src.utils.utils import save_simulation_data
 
 # Import IoT constants
 from src.services.constants import *
@@ -95,6 +96,7 @@ class Gateway:
   def __init__(self, env: simpy.Environment, in_store:simpy.Store):
     self.env = env
     self.in_store = in_store
+    self.logged_data = [] # Create a list to store logged data
     self.process = env.process(self.receive_data())
   
   def receive_data(self):
@@ -114,6 +116,7 @@ class Gateway:
           f"Latency: {packet['latency']}ms, Throughput: {packet['throughput']}kbps, "
           f"RSSI: {packet['rssi']}dBm"
         )
+      self.logged_data.append(packet) # Store the packet data
       logging.info("Packet has been received and processed successfully.")
 
 # Define IoTSimulation Class to manage the simulation environment
@@ -159,9 +162,19 @@ class IoTSimulation:
 # Define a function to run the simulation
 if __name__ == "__main__":
   try:
+    # Define iot simulation instance
     sim = IoTSimulation()
+    
+    # Start the simulation
     logging.info("Starting IoT Simulation")
     sim.start_simulation()
+    
+    # Save the simulation data to CSV
+    logging.info("Saving simulation data to CSV")
+    data, file_path = save_simulation_data(
+      data=sim.main_gateway.logged_data,
+      output_dir="C:/Project/iot-network-digital-twin/dataset"
+    )
     logging.info("IoT Simulation completed")
   except Exception as e:
     raise CustomException(sys, e)
