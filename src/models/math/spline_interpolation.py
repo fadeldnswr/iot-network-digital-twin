@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import os
 import sys
 
-from scipy.interpolate import UnivariateSpline
+from scipy.interpolate import UnivariateSpline, InterpolatedUnivariateSpline
 from src.services.constants import *
 from src.exception.exception import CustomException
 
@@ -26,9 +26,14 @@ class SplineInterpolation:
     '''
     Generates a spline function based on the provided parameters.
     '''
-    # Generate synthetic sine wave data with noise
-    self.noisy_data = self.mean + self.amplitude * np.sin(2 * np.pi * self.minutes / 1440) + 0.6 * np.random.randn(len(self.minutes))
-    self.spline = UnivariateSpline(self.minutes, self.noisy_data)
+    # Generate synthetic sine wave data with noise and trend
+    trend = 0.01 * self.minutes
+    seasonal = self.amplitude * np.sin(2 * np.pi * self.minutes / 1440)
+    noise = 0.75 * np.random.randn(len(self.minutes))
+    
+    # Combine the components to create noisy data
+    self.noisy_data = self.mean + trend + seasonal + noise
+    self.spline = InterpolatedUnivariateSpline(self.minutes, self.noisy_data, k=1)
     self.spline.set_smoothing_factor(self.smoothing_factor) # Adjust smoothing factor as needed
     
     # Get smoothed temperature values
@@ -58,8 +63,8 @@ if __name__ == "__main__":
     spline_interpolator = SplineInterpolation(
       smoothing_factor=400,  # Adjust smoothing factor as needed
       minutes=1440,          # 24 hours in minutes
-      amplitude=4.152174e+00,  # Amplitude of the sine wave
-      mean=MEAN_TEMP          # Mean temperature
+      amplitude=AMPLITUDE_HUMIDITY,  # Amplitude of the sine wave
+      mean=MEAN_HUMIDITY          # Mean temperature
     )
     # Generate the spline function and smoothed data
     spline_interpolator.generate_spline_function()

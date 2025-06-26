@@ -10,10 +10,15 @@ import random as rd
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
+import numpy as np
 
 from src.logging.logging import logging
 from src.exception.exception import CustomException
 from src.utils.utils import save_simulation_data
+
+# Import fourier and spline class 
+from src.models.math.fourier_series import FourierSeries
+from src.models.math.spline_interpolation import SplineInterpolation
 
 # Import IoT constants
 from src.services.constants import *
@@ -21,30 +26,33 @@ from src.services.constants import *
 # Define Sensor class for IoT sensors to send data to gateway
 class Sensor:
   '''Sensor class representing an IoT sensor device.'''
-  def __init__(self, env: simpy.Environment, temp_mean:float, hum_mean:float, out_store:simpy.Store, name:str, interval:int):
+  def __init__(self, env: simpy.Environment, temp_mean:float, hum_mean:float, out_store:simpy.Store, name:str, interval:int, minutes:int = 1440):
       self.env = env
       self.interval = interval
       self.temp_mean = temp_mean
       self.hum_mean = hum_mean
       self.out_store = out_store
+      self.minutes = minutes
       self.name = name
+      
+      # Calculate the Fourier series for temperature and humidity
+      self.temp_series = FourierSeries(N=150, minutes=minutes, amplitude=AMPLITUDE_TEMP, mean=temp_mean).generate_fourier_series()[1]
+      self.hum_series = FourierSeries(N=150, minutes=minutes, amplitude=AMPLITUDE_HUMIDITY, mean=hum_mean).generate_fourier_series()[1]
       self.process = env.process(self.send_data_to_esp())
   
   def send_data_to_esp(self):
     '''Method to simulate sending data from the sensor.'''
     while True:
       yield self.env.timeout(self.interval)
-      # Generate random data based on normal distribution
-      # using the mean and standard deviation constants
-      temp = rd.gauss(self.temp_mean, STD_TEMP)
-      humidity = rd.gauss(self.hum_mean, STD_HUMIDITY)
+      # Define the time interval
+      current_time = int(self.env.now)
       
       # Define the packet dictionary
       data = {
         "timestamp": self.env.now,
         "sensor": self.name,
-        "temperature": round(temp, 2),
-        "humidity": round(humidity, 2),
+        "temperature": round(self.temp_series[current_time], 2),
+        "humidity": round(self.hum_series[current_time], 2),
       }
       
       # Yield the packet to the store
