@@ -36,8 +36,13 @@ class Sensor:
       self.name = name
       
       # Calculate the Fourier series for temperature and humidity
-      self.temp_series = FourierSeries(N=150, minutes=minutes, amplitude=AMPLITUDE_TEMP, mean=temp_mean).generate_fourier_series()[1]
-      self.hum_series = FourierSeries(N=150, minutes=minutes, amplitude=AMPLITUDE_HUMIDITY, mean=hum_mean).generate_fourier_series()[1]
+      self.temp_series = FourierSeries(
+        N=150, minutes=minutes, 
+        amplitude=AMPLITUDE_TEMP, mean=temp_mean).generate_fourier_series()[1]
+      # Calculate the spline interpolation for humidity
+      self.hum_series = SplineInterpolation(
+        smoothing_factor=400, minutes=self.minutes,
+        amplitude=AMPLITUDE_HUMIDITY, mean=hum_mean).generate_spline_function()[1]
       self.process = env.process(self.send_data_to_esp())
   
   def send_data_to_esp(self):
