@@ -12,7 +12,7 @@ NUM_OF_SENSORS = 2
 NUM_OF_GATEWAYS = 1
 
 # Define constant for time intervals and simulation parameters
-SIM_TIME = 1440 # Simulation time in minutes
+SIM_TIME = 1441 # Simulation time in minutes
 SEND_DATA_TIME = 1 # Time interval for sending data in minutes
 
 # Define mean constant for each column data

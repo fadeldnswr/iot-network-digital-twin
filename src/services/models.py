@@ -26,7 +26,7 @@ from src.services.constants import *
 # Define Sensor class for IoT sensors to send data to gateway
 class Sensor:
   '''Sensor class representing an IoT sensor device.'''
-  def __init__(self, env: simpy.Environment, temp_mean:float, hum_mean:float, out_store:simpy.Store, name:str, interval:int, minutes:int = 1440):
+  def __init__(self, env: simpy.Environment, temp_mean:float, hum_mean:float, out_store:simpy.Store, name:str, interval:int, minutes:int = 1441):
       self.env = env
       self.interval = interval
       self.temp_mean = temp_mean
@@ -47,21 +47,18 @@ class Sensor:
   
   def send_data_to_esp(self):
     '''Method to simulate sending data from the sensor.'''
-    while True:
-      yield self.env.timeout(self.interval)
-      # Define the time interval
-      current_time = int(self.env.now)
-      
+    for i in range(self.minutes):
       # Define the packet dictionary
       data = {
         "timestamp": self.env.now,
         "sensor": self.name,
-        "temperature": round(self.temp_series[current_time], 2),
-        "humidity": round(self.hum_series[current_time], 2),
+        "temperature": round(self.temp_series[i], 2),
+        "humidity": round(self.hum_series[i], 2),
       }
       
       # Yield the packet to the store
       yield self.out_store.put(data)
+      yield self.env.timeout(self.interval)
 
 # Define ESP32 Class to manage multiple sensors
 class ESP32:
