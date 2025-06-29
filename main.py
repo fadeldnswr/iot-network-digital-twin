@@ -21,6 +21,9 @@ async def first_simple_route():
   '''
   Root endpoint to check if the API is running.
   '''
-  return {
-    "message": "Welcome to the Internet of Things and Digital Twin API!",
-  }
+  try:
+    return  {
+      "message": "Welcome to the Internet of Things and Digital Twin API!",
+    }
+  except Exception as e:
+    raise HTTPException(status_code=500, detail=str(e))
