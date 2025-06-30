@@ -6,6 +6,7 @@ import os, sys
 from src.services.constants import *
 from dotenv import load_dotenv
 from dataclasses import dataclass
+from src.utils.utils import save_model
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,6 +21,10 @@ class DataIngestionConfig:
     self.supabase_url: str = os.getenv("SUPABASE_API_URL")
     self.supabase_key: str = os.getenv("SUPABASE_API_KEY")
     self.supabase_table: str = os.getenv("SUPABASE_TABLE")
+    
+    # Check if credentials are set
+    if not all([self.supabase_url, self.supabase_key, self.supabase_table]):
+      raise ValueError("Supabase credentials are not set in the environment variables.")
     
     # Define paths for raw and processed data
     PROJECT_ROOT: str = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -47,20 +52,36 @@ class DataTransformationConfig:
   
   # Create preprocessor andf scaler file paths based on data type and device ID
   @property
-  def preprocessor_obj_file_path(self):
+  def preprocessor_obj_file_path(self) -> str:
     return os.path.join(self.sub_dir, f"{self.data_type}_preprocessor.pkl")
   
   @property
-  def features_scaler_file_path(self):
+  def features_scaler_file_path(self) -> str:
     return os.path.join(self.sub_dir, f"{self.data_type}_features_scaler.pkl")
   
   @property
-  def target_scaler_file_path(self):
+  def target_scaler_file_path(self) -> str:
     return os.path.join(self.sub_dir, f"{self.data_type}_target_scaler.pkl")
   
   @property
-  def transformed_data_file_path(self):
+  def transformed_data_file_path(self) -> str:
     return os.path.join(self.sub_dir, f"{self.data_type}_tranformed_data.csv")
+
+# Create model trainer configuration class
+@dataclass
+class ModelTrainerConfig:
+  '''
+  Configuration to store the model training artifacts
+  '''
+  is_real: bool = True  # Flag to indicate if the model is for real data
+  @property
+  def save_model_path(self) -> str:
+    '''
+    Returns the path where the trained model will be saved.
+    The path is constructed based on whether the data is real or simulated.
+    '''
+    model_name = "lstm_real.h5" if self.is_real else "lstm_simulation.h5"
+    return os.path.join("artifacts", model_name)
 
 # Define data transformation configuration for simulation data
 @dataclass

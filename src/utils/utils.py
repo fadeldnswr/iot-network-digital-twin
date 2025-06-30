@@ -12,6 +12,12 @@ from datetime import datetime, timedelta
 from src.exception.exception import CustomException
 from src.logging.logging import logging
 
+# Import metrics for evaluation
+from sklearn.metrics import (
+  mean_squared_error, mean_absolute_error,
+  r2_score, mean_absolute_percentage_error
+)
+
 # Create function to convert simulation data to DataFrame and export to CSV
 def save_simulation_data(data, output_dir:str, file_name=None):
   '''
@@ -95,5 +101,32 @@ def load_object(file_path):
   try:
     with open(file_path, "rb") as file:
       return dill.load(file)
+  except Exception as e:
+    raise CustomException(e, sys)
+
+# Create model evaluation function
+def evaluate_model(y_test, y_pred) -> pd.DataFrame:
+  '''
+  Evaluate the model using various metrics.
+  Parameters:
+  y_test (array-like): The true values.
+  y_pred (array-like): The predicted values.
+  Returns:
+  A dictionary containing the evaluation metrics.
+  '''
+  try:
+    # Calculate evaluation metrics
+    mse = mean_squared_error(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    mape = mean_absolute_percentage_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    
+    # Create a DataFrame to store the metrics
+    metrics_df = pd.DataFrame({
+      "Metrics": ["MSE", "MAE", "R2", "MAPE", "RMSE"],
+      "Values": [mse, mae, r2, mape, rmse]
+    })
+    return metrics_df
   except Exception as e:
     raise CustomException(e, sys)
