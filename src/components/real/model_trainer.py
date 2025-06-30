@@ -37,7 +37,7 @@ class ModelTrainerConfig:
     self.trained_model_file_path = save_model(model_name, os.path.join("artifacts", f"{model_name}_model.h5"))
 
 # Create model trainer class
-class ModelTrainer:
+class RealModelTrainer:
   '''
   Class to train LSTM model on time series data.
   '''

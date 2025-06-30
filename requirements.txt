@@ -9,3 +9,5 @@ uvicorn
 pydantic
 ipykernel
 simpy
+supabase
+python-dotenv
