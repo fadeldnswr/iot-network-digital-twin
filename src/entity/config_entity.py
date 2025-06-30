@@ -36,9 +36,31 @@ class DataTransformationConfig:
   Configuration class for data transformation.
   It defines the paths for transformed data and the model directory.
   '''
+  base_dir: str = "artifacts"
+  data_type: str = "real"  # Can be 'real' or 'simulation'
+  device_id: str = "esp32"  # Device ID for the data source
+  
+  def __post_init__(self):
+    # Create base directory for real of simulated data
+    self.sub_dir = os.path.join(self.base_dir, f"{self.data_type}_data_{self.device_id}")
+    os.makedirs(self.sub_dir, exist_ok=True)
+  
+  # Create preprocessor andf scaler file paths based on data type and device ID
   @property
   def preprocessor_obj_file_path(self):
-    return os.path.join("artifacts", f"esp32_data_preprocessor.pkl")
+    return os.path.join(self.sub_dir, f"{self.data_type}_preprocessor.pkl")
+  
+  @property
+  def features_scaler_file_path(self):
+    return os.path.join(self.sub_dir, f"{self.data_type}_features_scaler.pkl")
+  
+  @property
+  def target_scaler_file_path(self):
+    return os.path.join(self.sub_dir, f"{self.data_type}_target_scaler.pkl")
+  
+  @property
+  def transformed_data_file_path(self):
+    return os.path.join(self.sub_dir, f"{self.data_type}_tranformed_data.csv")
 
 # Define data transformation configuration for simulation data
 @dataclass

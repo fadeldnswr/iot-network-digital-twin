@@ -59,7 +59,7 @@ def fourier_series(t, *a):
   return ret
 
 # Create save object function
-def save_object(file_path, obj, device_id:str):
+def save_object(file_path, obj, is_real:bool):
   '''
   Save the object to a file using pickle.
   Parameters:
@@ -67,12 +67,19 @@ def save_object(file_path, obj, device_id:str):
   obj: The object to save.
   '''
   try:
-    path = os.path.join("artifacts", f"{device_id}_{file_path}" )
-    dir_path = os.path.dirname(path)
-    os.makedirs(dir_path, exist_ok=True)
+    # Create prefix to the file path based on whether it's real data or not
+    prefix = "real_data_" if is_real else "simulated_data_"
+    file_name = prefix + file_path
     
-    with open(file_path, "wb") as file:
-      dill.dump(obj, file=file)
+    # Set full path
+    full_path = os.path.join("artifacts", file_name)
+    
+    # Create directory if it doesn't exist
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    
+    # Save the object using dill
+    with open(full_path, "wb") as file:
+      dill.dump(obj, file)
   except Exception as e:
     raise CustomException(e, sys)
 
