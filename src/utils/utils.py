@@ -17,6 +17,7 @@ from sklearn.metrics import (
   mean_squared_error, mean_absolute_error,
   r2_score, mean_absolute_percentage_error
 )
+from tensorflow.keras.models import load_model
 
 # Create function to convert simulation data to DataFrame and export to CSV
 def save_simulation_data(data, output_dir:str, file_name=None):
@@ -128,5 +129,22 @@ def evaluate_model(y_test, y_pred) -> pd.DataFrame:
       "Values": [mse, mae, r2, mape, rmse]
     })
     return metrics_df
+  except Exception as e:
+    raise CustomException(e, sys)
+
+# Create function to load LSTM model
+def load_lstm_model(model_path : str) -> object:
+  '''
+  Load the LSTM model from the specified path.
+  Parameters:
+  model_path (str): The path to the LSTM model file.
+  Returns:
+  The loaded LSTM model.
+  '''
+  try:
+    if not model_path:
+      raise ValueError("Model path cannot be empty.")
+    model = load_model(model_path)
+    return model
   except Exception as e:
     raise CustomException(e, sys)
