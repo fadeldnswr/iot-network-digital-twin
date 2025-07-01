@@ -11,6 +11,8 @@ import dill
 from datetime import datetime, timedelta
 from src.exception.exception import CustomException
 from src.logging.logging import logging
+from typing import Tuple, List
+from datetime import datetime
 
 # Import metrics for evaluation
 from sklearn.metrics import (
@@ -146,5 +148,28 @@ def load_lstm_model(model_path : str) -> object:
       raise ValueError("Model path cannot be empty.")
     model = load_model(model_path)
     return model
+  except Exception as e:
+    raise CustomException(e, sys)
+
+# Create data preprocessing function
+def data_preprocessing(df: pd.DataFrame, cols: str) -> Tuple[List[float], List[str]]:
+  '''
+  Preprocess the input DataFrame by converting the timestamp to datetime format
+  and setting it as the index.
+  '''
+  try:
+    # Set the timestamp as datetime format
+    df["timestamp"] = pd.to_datetime(df["timestamp"], format="%Y-%m-%d | %H:%M:%S")
+    df.set_index("timestamp", inplace=True) # Set timestamp as index
+    
+    # Resample the data to 1-minute intervals and fill missing values
+    df_resampled = df.resample("min").mean()
+    df_resampled.fillna(df_resampled.mean(), inplace=True)
+    
+    # Select the specified columns and filter the date range
+    df_one_day_format = df_resampled.loc["2025-05-12 12:00:00":"2025-05-13 12:00:00"]
+    
+    # Select the specified columns and return it as a series
+    return [df_one_day_format[cols].tolist(), df_one_day_format.index.strftime('%Y-%m-%dT%H:%M:%S').tolist()]
   except Exception as e:
     raise CustomException(e, sys)

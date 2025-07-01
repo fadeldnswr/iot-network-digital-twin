@@ -17,7 +17,7 @@ app = FastAPI(
 
 # Define the API routers
 app.include_router(prediction.router, prefix="/prediction", tags=["Prediction"])
-# app.include_router(visualization.router, prefix="/visualization", tags=["Visualization"])
+app.include_router(visualization.router, prefix="/visualization", tags=["Visualization"])
 
 # Define a simple root endpoint
 @app.get("/")
