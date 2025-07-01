@@ -1,0 +1,97 @@
+[ 2025-07-01 08:48:58,682 ] 75 root - INFO - Starting the data ingestion pipeline.
+[ 2025-07-01 08:48:58,684 ] 53 root - INFO - Starting data ingestion process.
+[ 2025-07-01 08:48:59,340 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,414 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=1000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,490 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=2000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,556 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=3000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,646 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=4000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,730 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=5000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,802 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=6000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,887 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=7000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:48:59,960 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=8000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,041 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=9000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,120 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=10000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,193 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=11000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,277 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=12000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,367 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=13000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,430 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=14000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,496 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=15000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,551 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=16000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,619 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=17000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,675 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=18000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,733 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=19000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,800 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=20000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,858 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=21000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,929 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=22000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:00,991 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=23000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,063 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=24000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,138 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=25000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,225 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=26000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,311 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=27000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,373 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=28000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,447 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=29000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,537 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=30000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,620 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=31000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,695 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=32000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,764 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=33000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,839 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=34000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,900 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=35000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:01,966 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=36000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,022 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=37000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,097 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=38000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,177 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=39000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,232 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=40000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,300 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=41000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,369 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=42000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,460 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=43000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,526 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=44000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,606 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=45000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,695 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=46000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,763 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=47000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,814 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&offset=48000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-01 08:49:02,901 ] 42 root - INFO - Total records fetched from Supabase: 47462
+[ 2025-07-01 08:49:02,913 ] 64 root - INFO - Data successfully converted to DataFrame.
+[ 2025-07-01 08:49:02,913 ] 67 root - INFO - Data ingestion process completed successfully.
+[ 2025-07-01 08:49:02,913 ] 81 root - INFO - Data ingestion completed successfully.
+[ 2025-07-01 08:49:02,958 ] 49 root - INFO - Time column has been converted to datetime format.
+[ 2025-07-01 08:49:02,959 ] 53 root - INFO - Time column has been set as the index.
+[ 2025-07-01 08:49:02,967 ] 57 root - INFO - Data has been resampled to 1 minute intervals.
+[ 2025-07-01 08:49:02,969 ] 58 root - INFO - Null values in the data: id                       117
+temperature              117
+humidity(%)              117
+latency(ms)              117
+throughput(bytes/sec)    117
+packet_loss(%)           117
+rssi(dBm)                117
+dtype: int64
+[ 2025-07-01 08:49:02,973 ] 62 root - INFO - Missing values have been imputed using forward fill method.
+[ 2025-07-01 08:49:02,976 ] 66 root - INFO - Dataset shape for 24 hours: (1441, 7)
+[ 2025-07-01 08:49:02,979 ] 72 root - INFO - Rolling mean and std deviation features have been created.
+[ 2025-07-01 08:49:02,979 ] 75 root - INFO - Data transformation process completed successfully with shape (1441, 9).
+[ 2025-07-01 08:49:02,979 ] 113 root - INFO - Initiating data transformation process.
+[ 2025-07-01 08:49:02,984 ] 139 root - INFO - Saving the features and target scalers.
+[ 2025-07-01 08:49:02,988 ] 152 root - INFO - Transformed data has been saved successfully.
+[ 2025-07-01 08:49:02,988 ] 93 root - INFO - Data transformation completed successfully.
+[ 2025-07-01 08:49:02,988 ] 62 root - INFO - Initiating model training process.
+[ 2025-07-01 08:49:02,988 ] 71 root - INFO - Reshaping the input data for LSTM model.
+[ 2025-07-01 08:49:02,988 ] 74 root - INFO - Building the LSTM model.
+[ 2025-07-01 08:49:23,408 ] 94 root - INFO - Model training completed successfully.
+[ 2025-07-01 08:49:23,410 ] 97 root - INFO - Evaluating the model on test data.
+[ 2025-07-01 08:49:23,687 ] 104 root - INFO - Model evaluation metrics:   Metrics    Values
+0     MSE  0.754929
+1     MAE  0.652249
+2      R2  0.658057
+3    MAPE  0.011050
+4    RMSE  0.868867
+[ 2025-07-01 08:49:23,687 ] 107 root - INFO - Saving the trained model.
+[ 2025-07-01 08:49:23,688 ] 83 absl - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+[ 2025-07-01 08:49:23,760 ] 111 root - INFO - Model saved at artifacts\lstm_real.h5
+[ 2025-07-01 08:49:23,761 ] 106 root - INFO - Model training completed successfully.
+[ 2025-07-01 08:49:23,765 ] 107 root - INFO - Model evaluation results
+  Metrics    Values
+0     MSE  0.754929
+1     MAE  0.652249
+2      R2  0.658057
+3    MAPE  0.011050
+4    RMSE  0.868867
+[ 2025-07-01 08:49:23,765 ] 108 root - INFO - Data ingestion pipeline completed successfully.

@@ -6,7 +6,6 @@ import os, sys
 from src.services.constants import *
 from dotenv import load_dotenv
 from dataclasses import dataclass
-from src.utils.utils import save_model
 
 # Load environment variables from .env file
 load_dotenv()
