@@ -152,24 +152,27 @@ def load_lstm_model(model_path : str) -> object:
     raise CustomException(e, sys)
 
 # Create data preprocessing function
-def data_preprocessing(df: pd.DataFrame, cols: str) -> Tuple[List[float], List[str]]:
+def data_preprocessing(df: pd.DataFrame, cols: str, is_real: bool) -> Tuple[List[float], List[str]]:
   '''
   Preprocess the input DataFrame by converting the timestamp to datetime format
   and setting it as the index.
   '''
   try:
+    
     # Set the timestamp as datetime format
     df["timestamp"] = pd.to_datetime(df["timestamp"], format="%Y-%m-%d | %H:%M:%S")
     df.set_index("timestamp", inplace=True) # Set timestamp as index
     
-    # Resample the data to 1-minute intervals and fill missing values
-    df_resampled = df.resample("min").mean()
-    df_resampled.fillna(df_resampled.mean(), inplace=True)
+    # Check if its real data or simulated data
+    if is_real:
+      # Resample the data to 1-minute intervals and fill missing values
+      df = df.resample("min").mean()
+      df.fillna(df.mean(), inplace=True)
     
-    # Select the specified columns and filter the date range
-    df_one_day_format = df_resampled.loc["2025-05-12 12:00:00":"2025-05-13 12:00:00"]
+      # Select the specified columns and filter the date range
+      df = df.loc["2025-05-12 12:00:00":"2025-05-13 12:00:00"] if is_real else df
     
     # Select the specified columns and return it as a series
-    return [df_one_day_format[cols].tolist(), df_one_day_format.index.strftime('%Y-%m-%dT%H:%M:%S').tolist()]
+    return [df[cols].tolist(), df.index.strftime('%Y-%m-%dT%H:%M:%S').tolist()]
   except Exception as e:
     raise CustomException(e, sys)

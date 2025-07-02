@@ -32,7 +32,7 @@ async def visualize_real_data():
   This endpoint will return a visualization of the real data collected from the IoT devices.
   '''
   try:
-    rssi_series, time_index = data_preprocessing(real_data, "rssi(dBm)")
+    rssi_series, time_index = data_preprocessing(df=real_data, cols="rssi(dBm)", is_real=True)
     return {
       "data": rssi_series,
       "timestamp": time_index
