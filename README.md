@@ -17,22 +17,4 @@ This project is an end-to-end implementation of a Digital Twin system for IoT ne
 - ⚙️ Modular structure for scalability and maintenance
 
 ## 📁 Project Structure
-├── artifacts/ # Saved models, scalers, and serialized objects
-├── dataset/ # Raw and processed data (CSV, JSON, etc.)
-├── model/ # Model outputs and evaluation results
-├── notebook/ # Jupyter notebooks for validation and exploration
-├── src/
-    ├── api/ # FastAPI initialization (app, CORS, main)
-    ├── components/ # Ingestion, transformation, trainer modules
-    ├── db/ # Supabase API config and clients
-    ├── routes/ # API endpoint definitions
-    ├── schema/ # Pydantic request/response models
-    ├── services/ # Core business logic
-    ├── utils/ # Helper functions and serialization tools
-    ├── logging/ # Logging configuration
-    ├── exception/ # Custom exception classes
-    └── entity/ # Config classes for pipeline
-├── main.py # Entry point for FastAPI app
-├── Dockerfile # Docker configuration (optional)
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
+<pre> ```text ## 📁 Project Structure ├── artifacts/ # Saved models, scalers, and serialized objects ├── dataset/ # Raw and processed data (CSV, JSON, etc.) ├── model/ # Model outputs and evaluation results ├── notebook/ # Jupyter notebooks for validation and exploration ├── src/ │ ├── api/ # FastAPI initialization (app, CORS, main) │ ├── components/ # Ingestion, transformation, trainer modules │ ├── db/ # Supabase API config and clients │ ├── routes/ # API endpoint definitions │ ├── schema/ # Pydantic request/response models │ ├── services/ # Core business logic │ ├── utils/ # Helper functions and serialization tools │ ├── logging/ # Logging configuration │ ├── exception/ # Custom exception classes │ └── entity/ # Config classes for pipeline ├── main.py # Entry point for FastAPI app ├── Dockerfile # Docker configuration (optional) ├── requirements.txt # Python dependencies └── README.md # Project documentation ``` </pre>
