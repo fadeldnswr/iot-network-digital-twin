@@ -4,6 +4,7 @@ Main script to run the application.
 
 from fastapi import FastAPI, HTTPException
 from src.api.routes import prediction, visualization, user_configuration
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
   title="Internet of Things and Digital Twin API",
@@ -13,6 +14,15 @@ app = FastAPI(
     "name": "Fadel Achmad Daniswara",
     "email": "daniswarafadel@gmail.com"
   }
+)
+
+# Define CORS middleware to allow cross-origin requests
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],  # Allow all origins
+  allow_credentials=True,
+  allow_methods=["*"],  # Allow all methods (GET, POST, PUT, DELETE, etc.)
+  allow_headers=["*"],  # Allow all headers
 )
 
 # Define the API routers
