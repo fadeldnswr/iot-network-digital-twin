@@ -2,8 +2,8 @@
 Main script to run the application.
 '''
 
-from fastapi import FastAPI, HTTPException, APIRouter
-from src.api.routes import prediction, visualization
+from fastapi import FastAPI, HTTPException
+from src.api.routes import prediction, visualization, user_configuration
 
 app = FastAPI(
   title="Internet of Things and Digital Twin API",
@@ -18,6 +18,7 @@ app = FastAPI(
 # Define the API routers
 app.include_router(prediction.router, prefix="/prediction", tags=["Prediction"])
 app.include_router(visualization.router, prefix="/visualization", tags=["Visualization"])
+app.include_router(user_configuration.router, prefix="/user-config", tags=["User Configuration"])
 
 # Define a simple root endpoint
 @app.get("/")

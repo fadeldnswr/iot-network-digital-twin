@@ -1,3 +1,9 @@
+'''
+Schema for input data used in the prediction endpoint.
+This module defines the InputPrediction class with its attributes.
+It includes the necessary imports and defines the InputPrediction class with its attributes.
+'''
+
 from pydantic import BaseModel
 from typing import List, Optional
 

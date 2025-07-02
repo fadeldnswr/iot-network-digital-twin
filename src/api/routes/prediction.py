@@ -34,7 +34,7 @@ with open(f"{FEATURE_TARGET_PATH}/real_target_scaler.pkl", "rb") as file:
 
 # Define manual prediction endpoint
 @router.post("/")
-async def predict(data:InputPrediction, hours: int = Query(default=1, description="Predict the data for the next 'n' hours")):
+async def predict(data:InputPrediction, hours: int = Query(default=1, description="Predict the data for the next 'n' hours", gt=0, lt=24)):
   try:
     # Convert into minutes
     steps = hours * 60
@@ -73,12 +73,12 @@ async def predict(data:InputPrediction, hours: int = Query(default=1, descriptio
       # Generate prediction time
       timestamp = [datetime.now() + timedelta(minutes=i).strftime("%Y-%m-%dT%H:%M:%S") for i in range(steps)]
       
-      # Return the prediction results
-      return {
-        "data": prediction,
-        "steps": steps,
-        "timestamp": timestamp,
-        "hours_predicted": hours
-      }
+    # Return the prediction results
+    return {
+      "data": prediction,
+      "steps": steps,
+      "timestamp": timestamp,
+      "hours_predicted": hours
+    }
   except Exception as e:
     raise HTTPException(status_code=500, detail=str(e))
