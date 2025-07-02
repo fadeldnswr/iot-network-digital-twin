@@ -22,16 +22,16 @@ This project is an end-to-end implementation of a Digital Twin system for IoT ne
 ├── model/ # Model outputs and evaluation results
 ├── notebook/ # Jupyter notebooks for validation and exploration
 ├── src/
-│ ├── api/ # FastAPI initialization (app, CORS, main)
-│ ├── components/ # Ingestion, transformation, trainer modules
-│ ├── db/ # Supabase API config and clients
-│ ├── routes/ # API endpoint definitions
-│ ├── schema/ # Pydantic request/response models
-│ ├── services/ # Core business logic
-│ ├── utils/ # Helper functions and serialization tools
-│ ├── logging/ # Logging configuration
-│ ├── exception/ # Custom exception classes
-│ └── entity/ # Config classes for pipeline
+    ├── api/ # FastAPI initialization (app, CORS, main)
+    ├── components/ # Ingestion, transformation, trainer modules
+    ├── db/ # Supabase API config and clients
+    ├── routes/ # API endpoint definitions
+    ├── schema/ # Pydantic request/response models
+    ├── services/ # Core business logic
+    ├── utils/ # Helper functions and serialization tools
+    ├── logging/ # Logging configuration
+    ├── exception/ # Custom exception classes
+    └── entity/ # Config classes for pipeline
 ├── main.py # Entry point for FastAPI app
 ├── Dockerfile # Docker configuration (optional)
 ├── requirements.txt # Python dependencies
