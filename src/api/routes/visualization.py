@@ -22,7 +22,7 @@ router = APIRouter()
 
 # Read the real and simulated data
 real_data: pd.DataFrame = pd.read_csv(f"{ESP32_REAL_DATA}esp32_1_data.csv")
-simulated_data: pd.DataFrame = pd.read_csv(f"{ESP32_SIMULATED_DATA}simulation_data_20250710_151547.csv")
+simulated_data: pd.DataFrame = pd.read_csv(f"{ESP32_SIMULATED_DATA}simulation_data_20250710_190331.csv")
 
 # Define real data visualization endpoint
 @router.get("/real")
