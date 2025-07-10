@@ -6,38 +6,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import sys
+import pandas as pd
 
-from scipy.interpolate import UnivariateSpline, InterpolatedUnivariateSpline
+from scipy.interpolate import UnivariateSpline
 from src.services.constants import *
 from src.exception.exception import CustomException
+from dotenv import load_dotenv
 
 # Create Spline Interpolation Class
 class SplineInterpolation:
-  def __init__(self, smoothing_factor, minutes, amplitude, mean):
+  def __init__(self, smoothing_factor, data):
     self.smoothing_factor = smoothing_factor
-    self.minutes = np.arange(minutes)
-    self.amplitude = amplitude
-    self.mean = mean
+    self.data = data
+    self.minute = np.arange(len(data))  # Assuming data is indexed by minute
     self.spline = None
     self.smooth_data = None
-    self.noisy_data = None
   
   def generate_spline_function(self):
     '''
     Generates a spline function based on the provided parameters.
     '''
-    # Generate synthetic sine wave data with noise and trend
-    trend = 0.01 * self.minutes
-    seasonal = self.amplitude * np.sin(2 * np.pi * self.minutes / 1440)
-    noise = 0.75 * np.random.randn(len(self.minutes))
-    
-    # Combine the components to create noisy data
-    self.noisy_data = self.mean + trend + seasonal + noise
-    self.spline = InterpolatedUnivariateSpline(self.minutes, self.noisy_data, k=1)
-    self.spline.set_smoothing_factor(self.smoothing_factor) # Adjust smoothing factor as needed
-    
-    # Get smoothed temperature values
-    self.smooth_data = self.spline(self.minutes)
+    # Generate spline function based on the data
+    self.spline = UnivariateSpline(self.minute, self.data, s=self.smoothing_factor)
+    self.smooth_data = self.spline(self.minute)
     return self.spline, self.smooth_data
   
   def plot_spline(self):
@@ -46,25 +37,29 @@ class SplineInterpolation:
     '''
     # Plot the result
     plt.figure(figsize=(12, 4))
-    plt.plot(self.minutes, self.noisy_data, label="Original (Noisy)", alpha=0.5)
-    plt.plot(self.minutes, self.smooth_data, label="Spline Smoothed", linewidth=2)
-    plt.title("Spline Interpolation (Smoothing)")
+    plt.plot(self.minute, self.data, label="Original", alpha=0.5)
+    plt.plot(self.minute, self.smooth_data, label="Smoothed", linewidth=2)
+    plt.title("Spline Interpolation Modelling for Humidity")
     plt.xlabel("Minute")
     plt.ylabel("Data")
     plt.grid(True)
     plt.legend()
     plt.show()
 
-
 # Check if the script is run directly
 if __name__ == "__main__":
   try:
+    # Load the real data
+    load_dotenv()
+    ESP32_REAL_DATA = os.getenv("ESP32_REAL_DATA_PATH")
+
+    real_esp_data = pd.read_csv(f"{ESP32_REAL_DATA}esp32_1_data.csv")
+    humidity_real = real_esp_data["humidity(%)"].values
+    
     # Create an instance of SplineInterpolation
     spline_interpolator = SplineInterpolation(
-      smoothing_factor=400,  # Adjust smoothing factor as needed
-      minutes=1440,          # 24 hours in minutes
-      amplitude=AMPLITUDE_HUMIDITY,  # Amplitude of the sine wave
-      mean=MEAN_HUMIDITY          # Mean temperature
+      smoothing_factor=100,  # Adjust smoothing factor as needed
+      data=humidity_real,         
     )
     # Generate the spline function and smoothed data
     spline_interpolator.generate_spline_function()

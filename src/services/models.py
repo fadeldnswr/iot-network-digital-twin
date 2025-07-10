@@ -7,17 +7,27 @@ as well as methods for data processing and analysis.
 
 import simpy
 import random as rd
-import pandas as pd
-import matplotlib.pyplot as plt
 import sys
+import os
+import pandas as pd
 import numpy as np
 
 from src.logging.logging import logging
 from src.exception.exception import CustomException
 from src.utils.utils import save_simulation_data
 
-# Import fourier and spline class 
-from src.models.math.fourier_series import FourierSeries
+# Import environment variables
+from dotenv import load_dotenv
+load_dotenv()
+
+ESP32_REAL_DATA = os.getenv("ESP32_REAL_DATA_PATH")
+real_data = pd.read_csv(f"{ESP32_REAL_DATA}esp32_1_data.csv")
+
+# Define real values for temperature and humidity
+temp_real = real_data["temperature"].values
+humidity_real = real_data["humidity(%)"].values
+
+# Import spline class 
 from src.models.math.spline_interpolation import SplineInterpolation
 
 # Import IoT constants
@@ -26,28 +36,21 @@ from src.services.constants import *
 # Define Sensor class for IoT sensors to send data to gateway
 class Sensor:
   '''Sensor class representing an IoT sensor device.'''
-  def __init__(self, env: simpy.Environment, temp_mean:float, hum_mean:float, out_store:simpy.Store, name:str, interval:int, minutes:int = 1441):
+  def __init__(self, env: simpy.Environment, temp_series, hum_series, out_store:simpy.Store, name:str, interval:int, minutes:int = 1441):
       self.env = env
       self.interval = interval
-      self.temp_mean = temp_mean
-      self.hum_mean = hum_mean
       self.out_store = out_store
       self.minutes = minutes
       self.name = name
       
-      # Calculate the Fourier series for temperature and humidity
-      self.temp_series = FourierSeries(
-        N=150, minutes=minutes, 
-        amplitude=AMPLITUDE_TEMP, mean=temp_mean).generate_fourier_series()[1]
-      # Calculate the spline interpolation for humidity
-      self.hum_series = SplineInterpolation(
-        smoothing_factor=400, minutes=self.minutes,
-        amplitude=AMPLITUDE_HUMIDITY, mean=hum_mean).generate_spline_function()[1]
+      # Spline from real data
+      self.temp_series = temp_series
+      self.hum_series = hum_series
       self.process = env.process(self.send_data_to_esp())
   
   def send_data_to_esp(self):
     '''Method to simulate sending data from the sensor.'''
-    for i in range(self.minutes):
+    for i in range(min(self.minutes, len(self.temp_series))):
       # Define the packet dictionary
       data = {
         "timestamp": self.env.now,
@@ -134,7 +137,6 @@ class IoTSimulation:
   '''IoT Simulation class to manage the simulation environment.'''
   def __init__(
     self, sim_time = SIM_TIME, interval = SEND_DATA_TIME,
-    temp_mean = MEAN_TEMP, hum_mean = MEAN_HUMIDITY,
     packet_loss = MEAN_PACKET_LOSS, rssi = MEAN_RSSI,
     latency = MEAN_LATENCY, throughput = MEAN_THROUGHPUT):
       # Create a simulation environment
@@ -143,11 +145,25 @@ class IoTSimulation:
       self.sensor_store = [simpy.Store(self.env) for _ in range(NUM_OF_SENSORS)]
       # Store to gateway
       self.store_to_gateway = simpy.Store(self.env)
+      
       # Create sensors and ESP nodes
+      temp_spline = SplineInterpolation(
+        smoothing_factor=100, data=temp_real
+      )
+      _, temp_smooth = temp_spline.generate_spline_function()
+      hum_spline = SplineInterpolation(
+        smoothing_factor=100, data=humidity_real
+      )
+      _, hum_smooth = hum_spline.generate_spline_function()
       self.sensors = [
-        Sensor(env=self.env, temp_mean=temp_mean, hum_mean=hum_mean,
-        out_store=self.sensor_store[i], name=f"Sensor-{i+1}", interval=interval)
-        for i in range(NUM_OF_SENSORS)
+        Sensor(
+          env=self.env,
+          temp_series=temp_smooth,
+          hum_series=hum_smooth,
+          out_store=self.sensor_store[i],
+          name=f"Sensor-{i+1}",
+          interval=interval, minutes=SIM_TIME // interval
+        ) for i in range(NUM_OF_SENSORS)
       ]
       # Create ESP nodes
       self.esps = [
