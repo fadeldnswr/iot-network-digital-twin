@@ -50,7 +50,7 @@ class Sensor:
   
   def send_data_to_esp(self):
     '''Method to simulate sending data from the sensor.'''
-    for i in range(min(self.minutes, len(self.temp_series))):
+    for i in range(len(self.temp_series)):
       # Define the packet dictionary
       data = {
         "timestamp": self.env.now,
@@ -136,7 +136,7 @@ class Gateway:
 class IoTSimulation:
   '''IoT Simulation class to manage the simulation environment.'''
   def __init__(
-    self, sim_time = SIM_TIME, interval = SEND_DATA_TIME,
+    self, sim_time = len(temp_real), interval = SEND_DATA_TIME,
     packet_loss = MEAN_PACKET_LOSS, rssi = MEAN_RSSI,
     latency = MEAN_LATENCY, throughput = MEAN_THROUGHPUT):
       # Create a simulation environment
@@ -148,11 +148,11 @@ class IoTSimulation:
       
       # Create sensors and ESP nodes
       temp_spline = SplineInterpolation(
-        smoothing_factor=100, data=temp_real
+        smoothing_factor=100, data=temp_real, rolling_window=None
       )
       _, temp_smooth = temp_spline.generate_spline_function()
       hum_spline = SplineInterpolation(
-        smoothing_factor=100, data=humidity_real
+        smoothing_factor=100, data=humidity_real, rolling_window=None
       )
       _, hum_smooth = hum_spline.generate_spline_function()
       self.sensors = [

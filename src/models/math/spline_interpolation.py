@@ -15,19 +15,35 @@ from dotenv import load_dotenv
 
 # Create Spline Interpolation Class
 class SplineInterpolation:
-  def __init__(self, smoothing_factor, data):
+  def __init__(self, smoothing_factor, data, rolling_window=None):
     self.smoothing_factor = smoothing_factor
     self.data = data
     self.minute = np.arange(len(data))  # Assuming data is indexed by minute
+    self.rolling_window = rolling_window
+    self.data_processed = None
     self.spline = None
     self.smooth_data = None
+  
+  def process_data(self):
+    '''
+    Apply rolling average to the data.
+    This method can be used to preprocess the data before spline interpolation.
+    '''
+    if self.rolling_window is not None:
+      # Apply rolling average if specified
+      df = pd.Series(self.data)
+      rolling_mean = df.rolling(window=self.rolling_window, min_periods=1).mean()
+      self.data_processed = rolling_mean.values
+    else:
+      self.data_processed = self.data
   
   def generate_spline_function(self):
     '''
     Generates a spline function based on the provided parameters.
     '''
     # Generate spline function based on the data
-    self.spline = UnivariateSpline(self.minute, self.data, s=self.smoothing_factor)
+    self.process_data()
+    self.spline = UnivariateSpline(self.minute, self.data_processed, s=self.smoothing_factor)
     self.smooth_data = self.spline(self.minute)
     return self.spline, self.smooth_data
   
