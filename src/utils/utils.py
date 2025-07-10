@@ -152,7 +152,7 @@ def load_lstm_model(model_path : str) -> object:
     raise CustomException(e, sys)
 
 # Create data preprocessing function
-def data_preprocessing(df: pd.DataFrame, cols: str, is_real: bool) -> Tuple[List[float], List[str]]:
+def data_preprocessing(df: pd.DataFrame, is_real: bool) -> Tuple[List[List[float]], List[str]]:
   '''
   Preprocess the input DataFrame by converting the timestamp to datetime format
   and setting it as the index.
@@ -168,11 +168,12 @@ def data_preprocessing(df: pd.DataFrame, cols: str, is_real: bool) -> Tuple[List
       # Resample the data to 1-minute intervals and fill missing values
       df = df.resample("min").mean()
       df.fillna(df.mean(), inplace=True)
+      df = df.loc["2025-05-12 12:00:00":"2025-05-13 12:00:00"]
     
-      # Select the specified columns and filter the date range
-      df = df.loc["2025-05-12 12:00:00":"2025-05-13 12:00:00"] if is_real else df
+    data_values = df.select_dtypes(include="number").values.tolist()  # Select numeric columns
+    timestamps = df.index.strftime('%Y-%m-%dT%H:%M:%S').tolist()  # Format timestamps
     
     # Select the specified columns and return it as a series
-    return [df[cols].tolist(), df.index.strftime('%Y-%m-%dT%H:%M:%S').tolist()]
+    return data_values, timestamps
   except Exception as e:
     raise CustomException(e, sys)
