@@ -1,0 +1,4 @@
+[ 2025-07-11 09:54:22,744 ] 259 absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+[ 2025-07-11 09:54:27,180 ] 39 fastapi - WARNING - email-validator not installed, email fields will be treated as str.
+To install, run: pip install email-validator
+[ 2025-07-11 09:55:16,202 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%2A&timestamp=gte.2025-05-12T12%3A00%3A00&timestamp=lte.2025-05-13T12%3A00%3A00 "HTTP/2 200 OK"
