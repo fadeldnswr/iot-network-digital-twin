@@ -12,9 +12,13 @@ import os
 import pandas as pd
 import numpy as np
 
+from datetime import datetime
 from src.logging.logging import logging
 from src.exception.exception import CustomException
-from src.utils.utils import save_simulation_data
+from src.utils.utils import (
+  insert_data_to_supabase,
+  format_data
+)
 
 # Import environment variables
 from dotenv import load_dotenv
@@ -196,11 +200,9 @@ if __name__ == "__main__":
     sim.start_simulation()
     
     # Save the simulation data to CSV
-    logging.info("Saving simulation data to CSV")
-    data, file_path = save_simulation_data(
-      data=sim.main_gateway.logged_data,
-      output_dir="C:/Project/iot-network-digital-twin/dataset"
-    )
+    logging.info("Saving simulation data to Supabase")
+    formatted_data = format_data(sim.main_gateway.logged_data, start_time=datetime(2025, 5, 12, 10, 14, 13), seconds=2)
+    insert_data_to_supabase(table_name="iot_simulation", data=formatted_data)
     logging.info("IoT Simulation completed")
   except Exception as e:
     raise CustomException(sys, e)

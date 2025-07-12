@@ -13,6 +13,7 @@ from src.exception.exception import CustomException
 from src.logging.logging import logging
 from typing import Tuple, List
 from datetime import datetime
+from src.api.db.supabase_config import create_supabase_client
 
 # Import metrics for evaluation
 from sklearn.metrics import (
@@ -175,5 +176,44 @@ def data_preprocessing(df: pd.DataFrame, is_real: bool) -> Tuple[List[List[float
     
     # Select the specified columns and return it as a series
     return data_values, timestamps
+  except Exception as e:
+    raise CustomException(e, sys)
+
+# Define function to insert data into Supabase
+def insert_data_to_supabase(table_name: str, data, batch_size: int = 1000):
+  '''
+  Insert data into a Supabase table in batches.
+  Parameters:
+  table_name (str): The name of the Supabase table.
+  data (list): The data to insert into the table.
+  batch_size (int): The number of records to insert in each batch.
+  '''
+  try:
+    supabase = create_supabase_client()
+    for i in range(0, len(data), batch_size):
+      batch = data[i:i + batch_size]
+      supabase.table(table_name).insert(batch).execute()
+    print(f"Inserted {len(data)} records into {table_name} table.")
+  except Exception as e:
+    raise CustomException(e, sys)
+
+# Define function to format the data from Simpy simulation
+def format_data(logged_data, start_time: datetime, seconds: int = 2) -> List[dict]:
+  '''
+  Format the logged data from the Simpy simulation.
+  '''
+  try:
+    formatted_data = []
+    for entry in logged_data:
+      formatted_data.append({
+        "timestamp": (start_time + timedelta(seconds=int(entry["timestamp"]) * seconds)).isoformat(),
+        "temperature": entry["temperature"],
+        "humidity(%)": entry["humidity"],
+        "latency(ms)": entry["latency"],
+        "throughput(bytes/sec)": entry["throughput"],
+        "packet_loss(%)": entry["packet_loss"],
+        "rssi(dBm)": entry["rssi"],
+      })
+    return formatted_data
   except Exception as e:
     raise CustomException(e, sys)
