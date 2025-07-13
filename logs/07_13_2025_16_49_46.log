@@ -1,0 +1,5 @@
+[ 2025-07-13 16:49:49,103 ] 39 fastapi - WARNING - email-validator not installed, email fields will be treated as str.
+To install, run: pip install email-validator
+[ 2025-07-13 16:50:02,697 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/iot_simulation?select=temperature%2Ctimestamp&offset=0&limit=1000&timestamp=gte.2025-05-12+14%3A00%3A00&timestamp=lte.2025-05-12+15%3A00%3A00 "HTTP/2 200 OK"
+[ 2025-07-13 16:50:02,765 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/iot_simulation?select=temperature%2Ctimestamp&offset=1000&limit=1000&timestamp=gte.2025-05-12+14%3A00%3A00&timestamp=lte.2025-05-12+15%3A00%3A00 "HTTP/2 200 OK"
+[ 2025-07-13 16:50:02,841 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/iot_simulation?select=temperature%2Ctimestamp&offset=2000&limit=1000&timestamp=gte.2025-05-12+14%3A00%3A00&timestamp=lte.2025-05-12+15%3A00%3A00 "HTTP/2 200 OK"

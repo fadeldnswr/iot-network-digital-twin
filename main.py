@@ -3,7 +3,13 @@ Main script to run the application.
 '''
 
 from fastapi import FastAPI, HTTPException
-from src.api.routes import prediction, visualization, user_configuration
+from src.api.routes import (
+  real_data,
+  error_metrics,
+  stats_summary,
+  simulated_data,
+  user_configuration
+)
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
@@ -26,9 +32,10 @@ app.add_middleware(
 )
 
 # Define the API routers
-app.include_router(prediction.router, prefix="/prediction", tags=["Prediction"])
-app.include_router(visualization.router, prefix="/visualization", tags=["Visualization"])
-app.include_router(user_configuration.router, prefix="/user-config", tags=["User Configuration"])
+app.include_router(real_data.router, prefix="/visualize-real", tags=["Real Data"])
+app.include_router(simulated_data.router, prefix="/visualize-simulated", tags=["Simulated Data"])
+app.include_router(stats_summary.router, prefix="/statistical", tags=["Statistical Summary"])
+app.include_router(error_metrics.router, prefix="/error", tags=["Performance Metrics"])
 
 # Define a simple root endpoint
 @app.get("/")

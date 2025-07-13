@@ -1,0 +1,7 @@
+[ 2025-07-13 18:39:07,341 ] 39 fastapi - WARNING - email-validator not installed, email fields will be treated as str.
+To install, run: pip install email-validator
+[ 2025-07-13 18:39:27,091 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%22humidity%28%25%29%22%2Ctimestamp&timestamp=gte.2025-05-12+12%3A00%3A00&order=timestamp.asc&offset=0&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-13 18:39:27,167 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%22humidity%28%25%29%22%2Ctimestamp&timestamp=gte.2025-05-12+12%3A00%3A00&order=timestamp.asc&offset=1000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-13 18:39:27,249 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%22humidity%28%25%29%22%2Ctimestamp&timestamp=gte.2025-05-12+12%3A00%3A00&order=timestamp.asc&offset=2000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-13 18:39:27,320 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%22humidity%28%25%29%22%2Ctimestamp&timestamp=gte.2025-05-12+12%3A00%3A00&order=timestamp.asc&offset=3000&limit=1000 "HTTP/2 200 OK"
+[ 2025-07-13 18:39:27,383 ] 1025 httpx - INFO - HTTP Request: GET https://abcdkzdkpdpilgtstaiq.supabase.co/rest/v1/esp32_real_data?select=%22humidity%28%25%29%22%2Ctimestamp&timestamp=gte.2025-05-12+12%3A00%3A00&order=timestamp.asc&offset=4000&limit=1000 "HTTP/2 200 OK"
