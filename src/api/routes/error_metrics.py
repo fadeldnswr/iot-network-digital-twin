@@ -27,7 +27,7 @@ async def statistical_summary(
   category: str = Query(..., description="Category of data to filter by (temperature, humidity(%), latency(ms), rssi(dBm))"),
 ):
   '''
-  Function to visualize statistical summary from the IoT network.
+  Function to visualize error metrics from the IoT network.
   '''
   # Define variable to hold all data
   batch_size = 1000

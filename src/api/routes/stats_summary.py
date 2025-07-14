@@ -88,7 +88,7 @@ async def statistical_summary(
     return {
       "status": 200,
       "message": f"Statistical summary for {category} data retrieved successfully.",
-      "real_data_statisctics": real_statistics,
+      "real_data_statistics": real_statistics,
       "simulated_data_statistics": simulated_statistics,
       "real_data_count": len(real_data_list),
       "simulated_data_count": len(simulated_data_list),
