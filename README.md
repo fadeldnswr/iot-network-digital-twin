@@ -1,5 +1,5 @@
-# 🛰️ IoT Network Digital Twin for Monitoring and Prediction
-![alt text](image.png)
+# IoT Network Digital Twin - A Fullstack Simulation Prototype
+![alt text](image-1.png)
 ## Project Description
 This project is an end-to-end implementation of a Digital Twin system for IoT network performance, focusing on monitoring, anomaly prediction, and comparative simulation between real and synthetic data. The system collects data from a physical IoT network, applies data preprocessing and validation.
 
