@@ -1,12 +1,10 @@
 # 🛰️ IoT Network Digital Twin for Monitoring and Prediction
 ![alt text](image.png)
 ## Project Description
-This project is an end-to-end implementation of a Digital Twin system for IoT network performance, focusing on real-time monitoring, anomaly prediction, and comparative simulation between real and synthetic data. The system collects data from a physical IoT network, applies data preprocessing and validation, and leverages LSTM-based deep learning models to forecast network quality parameters such as RSSI, latency, and packet loss.
+This project is an end-to-end implementation of a Digital Twin system for IoT network performance, focusing on monitoring, anomaly prediction, and comparative simulation between real and synthetic data. The system collects data from a physical IoT network, applies data preprocessing and validation.
 
 ## 🔧 Features
-- ✅ Real-time data ingestion from Supabase (IoT sensor data)
 - 🔁 Preprocessing pipeline with timestamp handling and resampling
-- 🧠 LSTM-based model for RSSI prediction (with *.h5 model export)
 - 📊 Side-by-side visualization of real vs simulated digital twin data
 - ⚙️ API endpoints (FastAPI) for:
     - Manual prediction with input features
@@ -17,8 +15,7 @@ This project is an end-to-end implementation of a Digital Twin system for IoT ne
 - ⚙️ Modular structure for scalability and maintenance
 
 ## 📁 Project Structure
-```
-├── artifacts/            # Saved models, scalers, and serialized objects  
+``` 
 ├── dataset/              # Raw and processed data (CSV, JSON, etc.)  
 ├── model/                # Model outputs and evaluation results  
 ├── notebook/             # Jupyter notebooks for validation and exploration  
@@ -28,7 +25,7 @@ This project is an end-to-end implementation of a Digital Twin system for IoT ne
 │   ├── db/               # Supabase API config and clients  
 │   ├── routes/           # API endpoint definitions  
 │   ├── schema/           # Pydantic request/response models  
-│   ├── services/         # Core business logic  
+│   ├── services/         # SimPy model  
 │   ├── utils/            # Helper functions and serialization tools  
 │   ├── logging/          # Logging configuration  
 │   ├── exception/        # Custom exception classes  
